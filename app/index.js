@@ -23,6 +23,7 @@ const weatherButton = document.getElementById("weatherButton");
 const statsButton = document.getElementById("showStatsButton");
 const weatherButtonIcon = document.getElementById("weatherButtonIcon");
 const stepsText = document.getElementById("stepstext");
+const stepsPerHourText = document.getElementById("stepsperhourtext");
 const toastElement = document.getElementById("toastUse");
 const statsDetailsElement = document.getElementById("statsDetailsUse");
 const toastText =   document.getElementById("toastText");
@@ -63,6 +64,7 @@ const setAodListener = () => {
     const weatherSection = document.getElementById("weather");
     const heartRateSection = document.getElementById("heartRate");
     const stepsSection = document.getElementById("steps");
+    const stepsPerHourSection = document.getElementById("stepsperhour");
     const minutesLayer = document.getElementById("minutesLayer");
 
     display.addEventListener("change", () => {
@@ -73,6 +75,7 @@ const setAodListener = () => {
         weatherSection.style.display = "inline";
         heartRateSection.style.display = "inline";
         stepsSection.style.display = "inline";
+        stepsPerHourSection.style.display = "inline";
         minutesLayer.style.display = "inline";
         hrm.start();
         bodyPresence.start();
@@ -82,6 +85,7 @@ const setAodListener = () => {
         weatherSection.style.display = "none";
         heartRateSection.style.display = "none";
         stepsSection.style.display = "none";
+        stepsPerHourSection.style.display = "none";
         minutesLayer.style.display = "none";
         hrm.stop();
         bodyPresence.stop();
@@ -101,6 +105,7 @@ const hanldeClockTick = () => {
   secHand.groupTransform.rotate.angle = secondsToAngle(secs);
 
   stepsText.text = today.adjusted.steps;
+  stepsPerHourText.text = 0;  // getStepsPerHour;
   dateText.text = todayDate.getDate() + " " + monthNames[todayDate.getMonth()].substring(0, 3);
 }
 
@@ -142,6 +147,7 @@ const displayToast = (message) => {
 
 const displayStatsDetails = () => {
   const statSteps = document.getElementById("statsSteps");
+  const statStepsPerHour = document.getElementById("statStepsPerHour");
   const statCals = document.getElementById("statsCals");
   const statDist = document.getElementById("statsDist");
   const statHr = document.getElementById("statsHr");
@@ -149,6 +155,8 @@ const displayStatsDetails = () => {
   const statFloors = document.getElementById("statsFloors");
 
   statSteps.text = today.adjusted.steps || 0;
+  statStepsPerHour.text = 0;
+  // statStepsPerHour.text = getStepsPerHour || 0;
   statCals.text = today.adjusted.calories || 0;
   statDist.text = today.adjusted.distance || 0;
   statHr.text = (hrm && bodyPresence.present) ? hrm.heartRate : '--';
