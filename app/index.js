@@ -99,14 +99,14 @@ const hanldeClockTick = () => {
   let hours = todayDate.getHours() % 12;
   let mins = todayDate.getMinutes();
   let secs = todayDate.getSeconds();
+  let customdatestr = daysNames[todayDate.getDay()].substring(0, 3) + " " + todayDate.getDate() + " " + monthNames[todayDate.getMonth()].substring(0, 3);
 
   hourHand.groupTransform.rotate.angle = hoursToAngle(hours, mins);
   minHand.groupTransform.rotate.angle = minutesToAngle(mins);
   secHand.groupTransform.rotate.angle = secondsToAngle(secs);
 
   stepsText.text = today.adjusted.steps;
-  stepsPerHourText.text = 0;  // getStepsPerHour;
-  dateText.text = todayDate.getDate() + " " + monthNames[todayDate.getMonth()].substring(0, 3);
+  dateText.text = customdatestr;
 }
 
 const fetchTodayWeather = () => {
